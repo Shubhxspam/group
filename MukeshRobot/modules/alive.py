@@ -68,7 +68,7 @@ async def restart(client, m: Message):
     await asyncio.sleep(0.3)
     
     umm = await m.reply_sticker(
-        "CAACAgUAAxkDAAJHbmLuy2NEfrfh6lZSohacEGrVjd5wAAIOBAACl42QVKnra4sdzC_uKQQ"
+        "CAACAgUAAxkBAAEOEcBn0utZ9o0K4IBIsG0AAR6xyYrbaoIAAooKAAJrXzFXgCeEA4zrx8k2BA"
     )
     await umm.delete()
     owner=await pbot.get_users(OWNER_ID)
