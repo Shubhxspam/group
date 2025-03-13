@@ -66,7 +66,7 @@ async def google_search(client, message):
         await message.reply_text(f"`Google search me error aaya:` {str(e)}")
 
 
-    )
+    
 
 
 @register(pattern="^/img (.*)")
