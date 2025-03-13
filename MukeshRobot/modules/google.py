@@ -64,7 +64,7 @@ async def google_search(client, message):
     
     except Exception as e:
         await message.reply_text(f"`Google search me error aaya:` {str(e)}")
-
+            try:
 
     
 
