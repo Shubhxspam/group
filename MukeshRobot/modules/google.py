@@ -9,7 +9,7 @@ import requests
 from bing_image_downloader import downloader
 from bs4 import BeautifulSoup
 from PIL import Image
-from search_engine_parser import GoogleSearch, exceptions
+from search_engine_parser import GoogleSearch
 from MukeshRobot import telethn as tbot
 from MukeshRobot.events import register
 
@@ -49,10 +49,7 @@ async def _(event):
         await webevent.edit(
             "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
         )
-    except exceptions.NoResultsOrTrafficError:
-        await webevent.edit("`No results found or the query was flagged as unusual traffic.`")
-    except Exception as e:
-        await webevent.edit(f"`An error occurred: {e}`")
+    
 
 
 @register(pattern="^/img (.*)")
