@@ -3,8 +3,6 @@ import io
 import os
 import re
 import urllib
-import urllib.request
-import bs4
 import requests
 from bing_image_downloader import downloader
 from bs4 import BeautifulSoup
@@ -19,19 +17,21 @@ opener.addheaders = [("User-agent", useragent)]
 
 
 @register(pattern="^/google (.*)")
-async def _(event):
+async def google_search(event):
     if event.fwd_from:
         return
 
     webevent = await event.reply("Searching...")
     match = event.pattern_match.group(1)
     page = re.findall(r"page=\d+", match)
+    
     try:
         page = page[0]
         page = page.replace("page=", "")
-        match = match.replace("page=" + page[0], "")
+        match = match.replace("page=" + page, "")
     except IndexError:
         page = 1
+    
     search_args = (str(match), int(page))
     gsearch = GoogleSearch()
 
@@ -47,9 +47,10 @@ async def _(event):
             except IndexError:
                 break
         await webevent.edit(
-            "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
+            f"**Search Query:**\n`{match}`\n\n**Results:**\n{msg}", link_preview=False
         )
-    
+    except Exception as e:
+        await webevent.edit(f"Error: {str(e)}")
 
 
 @register(pattern="^/img (.*)")
@@ -67,19 +68,19 @@ async def img_sampler(event):
         force_replace=False,
         timeout=60,
     )
-    os.chdir(f'./store/"{query}"')
+    os.chdir(f'./store/{query}')
     types = ("*.png", "*.jpeg", "*.jpg")  # the tuple of file types
     files_grabbed = []
-    for files in types:
-        files_grabbed.extend(glob.glob(files))
+    for file in types:
+        files_grabbed.extend(glob.glob(file))
+    
     await tbot.send_file(event.chat_id, files_grabbed, reply_to=event.id)
     os.chdir("/app")
     os.system("rm -rf store")
 
 
 @register(pattern=r"^/reverse|^/pp|^/grs(?: |$)(\d*)")
-async def okgoogle(img):
-    """For .reverse command, Google search images and stickers."""
+async def reverse_image_search(img):
     if os.path.isfile("okgoogle.png"):
         os.remove("okgoogle.png")
 
@@ -88,7 +89,7 @@ async def okgoogle(img):
         photo = io.BytesIO()
         await tbot.download_media(message, photo)
     else:
-        await img.reply("`Reply to photo or sticker fu*ker`")
+        await img.reply("`Reply to photo or sticker`")
         return
 
     if photo:
@@ -96,46 +97,41 @@ async def okgoogle(img):
         try:
             image = Image.open(photo)
         except OSError:
-            await dev.edit("`Unsupported sexuality, most likely.`")
+            await dev.edit("`Unsupported image type`")
             return
         name = "okgoogle.png"
         image.save(name, "PNG")
         image.close()
-        # https://stackoverflow.com/questions/23270175/google-reverse-image-search-using-post-request#28792943
+        
         searchUrl = "https://www.google.com/searchbyimage/upload"
         multipart = {"encoded_image": (name, open(name, "rb")), "image_content": ""}
         response = requests.post(searchUrl, files=multipart, allow_redirects=False)
-        fetchUrl = response.headers["Location"]
+        fetchUrl = response.headers.get("Location")
 
-        if response != 400:
-            await dev.edit(
-                "`Image successfully uploaded to Google. Maybe.`"
-                "\n`Parsing source now. Maybe.`"
-            )
+        if response.status_code != 400:
+            await dev.edit("`Image successfully uploaded to Google. Processing...`")
         else:
-            await dev.edit("`Google told me to fu*k off.`")
+            await dev.edit("`Google rejected the image upload.`")
             return
 
         os.remove(name)
-        match = await ParseSauce(fetchUrl + "&preferences?hl=en&fg=1#languages")
+        match = await parse_sauce(fetchUrl + "&preferences?hl=en&fg=1#languages")
         guess = match["best_guess"]
         imgspage = match["similar_images"]
 
         if guess and imgspage:
             await dev.edit(f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
         else:
-            await dev.edit("`Can't find this piece of shit.`")
+            await dev.edit("`Image not found.`")
             return
 
-        if img.pattern_match.group(1):
-            lim = img.pattern_match.group(1)
-        else:
-            lim = 3
+        lim = img.pattern_match.group(1) if img.pattern_match.group(1) else 3
         images = await scam(match, lim)
         yeet = []
         for i in images:
             k = requests.get(i)
             yeet.append(k.content)
+        
         try:
             await tbot.send_file(
                 entity=await tbot.get_input_entity(img.chat_id),
@@ -144,13 +140,11 @@ async def okgoogle(img):
             )
         except TypeError:
             pass
-        await dev.edit(
-            f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})"
-        )
+        
+        await dev.edit(f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})")
 
 
-async def ParseSauce(googleurl):
-    """Parse/Scrape the HTML code for the info we want."""
+async def parse_sauce(googleurl):
     source = opener.open(googleurl).read()
     soup = BeautifulSoup(source, "html.parser")
 
@@ -172,7 +166,6 @@ async def ParseSauce(googleurl):
 
 
 async def scam(results, lim):
-
     single = opener.open(results["similar_images"]).read()
     decoded = single.decode("utf-8")
 
@@ -194,7 +187,6 @@ async def scam(results, lim):
 
 @register(pattern="^/app (.*)")
 async def apk(e):
-
     try:
         app_name = e.pattern_match.group(1)
         remove_space = app_name.split(" ")
@@ -203,7 +195,7 @@ async def apk(e):
             "https://play.google.com/store/search?q=" + final_name + "&c=apps"
         )
         str(page.status_code)
-        soup = bs4.BeautifulSoup(page.content, "lxml", from_encoding="utf-8")
+        soup = BeautifulSoup(page.content, "lxml", from_encoding="utf-8")
         results = soup.findAll("div", "ZmHEEd")
         app_name = (
             results[0].findNext("div", "Vpfmgd").findNext("div", "WsMG1c nnK0zc").text
@@ -258,14 +250,14 @@ async def apk(e):
     except IndexError:
         await e.reply("No result found in search. Please enter **Valid app name**")
     except Exception as err:
-        await e.reply("Exception Occured:- " + str(err))
+        await e.reply(f"Exception Occurred: {str(err)}")
 
 
 __mod_name__ = "Gᴏᴏɢʟᴇ"
 
 __help__ = """
- ❍ /google <text>*:* Perform a google search
- ❍ /img <text>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: `/img hello lim=10`
- ❍ /app <appname>*:* Searches for an app in Play Store and returns its details.
- ❍ /reverse |pp |grs: Does a reverse image search of the media which it was replied to.
+ ❍ /google <text>: Perform a Google search
+ ❍ /img <text>: Search Google for images and returns them. Specify lim for more results (e.g., `/img hello lim=10`).
+ ❍ /app <appname>: Search for an app on the Play Store and returns its details.
+ ❍ /reverse |pp |grs: Performs a reverse image search of the media you replied to.
 """
