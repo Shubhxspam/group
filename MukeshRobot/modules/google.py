@@ -246,5 +246,8 @@ async def apk(e):
             "five", "5"
         )
         app_details += (
-            "\n<code>Features :</code> <a href='"
-           
+            "\n<code>Features :</code> <a href='" + app_link + "'>Link</a>"
+        )
+        await e.reply(app_details, parse_mode="html")
+    except Exception as e:
+        await e.reply(str(e))
