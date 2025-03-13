@@ -4,14 +4,12 @@ import os
 import re
 import urllib
 import urllib.request
-
 import bs4
 import requests
 from bing_image_downloader import downloader
 from bs4 import BeautifulSoup
 from PIL import Image
-from search_engine_parser import GoogleSearch
-
+from search_engine_parser import GoogleSearch, exceptions
 from MukeshRobot import telethn as tbot
 from MukeshRobot.events import register
 
@@ -36,19 +34,25 @@ async def _(event):
         page = 1
     search_args = (str(match), int(page))
     gsearch = GoogleSearch()
-    gresults = await gsearch.async_search(*search_args)
-    msg = ""
-    for i in range(len(gresults["links"])):
-        try:
-            title = gresults["titles"][i]
-            link = gresults["links"][i]
-            desc = gresults["descriptions"][i]
-            msg += f"❍[{title}]({link})\n**{desc}**\n\n"
-        except IndexError:
-            break
-    await webevent.edit(
-        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
-    )
+
+    try:
+        gresults = await gsearch.async_search(*search_args)
+        msg = ""
+        for i in range(len(gresults["links"])):
+            try:
+                title = gresults["titles"][i]
+                link = gresults["links"][i]
+                desc = gresults["descriptions"][i]
+                msg += f"❍[{title}]({link})\n**{desc}**\n\n"
+            except IndexError:
+                break
+        await webevent.edit(
+            "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
+        )
+    except exceptions.NoResultsOrTrafficError:
+        await webevent.edit("`No results found or the query was flagged as unusual traffic.`")
+    except Exception as e:
+        await webevent.edit(f"`An error occurred: {e}`")
 
 
 @register(pattern="^/img (.*)")
@@ -74,11 +78,6 @@ async def img_sampler(event):
     await tbot.send_file(event.chat_id, files_grabbed, reply_to=event.id)
     os.chdir("/app")
     os.system("rm -rf store")
-
-
-opener = urllib.request.build_opener()
-useragent = "Mozilla/5.0 (Linux; Android 11; SM-M017F Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.157 Mobile Safari/537.36"
-opener.addheaders = [("User-agent", useragent)]
 
 
 @register(pattern=r"^/reverse|^/pp|^/grs(?: |$)(\d*)")
@@ -155,7 +154,6 @@ async def okgoogle(img):
 
 async def ParseSauce(googleurl):
     """Parse/Scrape the HTML code for the info we want."""
-
     source = opener.open(googleurl).read()
     soup = BeautifulSoup(source, "html.parser")
 
@@ -273,5 +271,4 @@ __help__ = """
  ❍ /img <text>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: `/img hello lim=10`
  ❍ /app <appname>*:* Searches for an app in Play Store and returns its details.
  ❍ /reverse |pp |grs: Does a reverse image search of the media which it was replied to.
-
 """
