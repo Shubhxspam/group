@@ -2,14 +2,14 @@ import glob
 import io
 import os
 import re
-import urllib
 import requests
-from bing_image_downloader import downloader
-from bs4 import BeautifulSoup
 from PIL import Image
 from search_engine_parser import GoogleSearch
+from bs4 import BeautifulSoup
+from bing_image_downloader import downloader
 from MukeshRobot import telethn as tbot
 from MukeshRobot.events import register
+import urllib.request
 
 opener = urllib.request.build_opener()
 useragent = "Mozilla/5.0 (Linux; Android 11; SM-M017F Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.157 Mobile Safari/537.36"
@@ -36,7 +36,8 @@ async def google_search(event):
     gsearch = GoogleSearch()
 
     try:
-        gresults = await gsearch.async_search(*search_args)
+        # Running the search synchronously, not async
+        gresults = gsearch.search(*search_args)
         msg = ""
         for i in range(len(gresults["links"])):
             try:
@@ -74,7 +75,11 @@ async def img_sampler(event):
     for file in types:
         files_grabbed.extend(glob.glob(file))
     
-    await tbot.send_file(event.chat_id, files_grabbed, reply_to=event.id)
+    if files_grabbed:
+        await tbot.send_file(event.chat_id, files_grabbed, reply_to=event.id)
+    else:
+        await event.reply("No images found.")
+    
     os.chdir("/app")
     os.system("rm -rf store")
 
@@ -89,7 +94,7 @@ async def reverse_image_search(img):
         photo = io.BytesIO()
         await tbot.download_media(message, photo)
     else:
-        await img.reply("`Reply to photo or sticker`")
+        await img.reply("`Reply to a photo or sticker.`")
         return
 
     if photo:
@@ -97,7 +102,7 @@ async def reverse_image_search(img):
         try:
             image = Image.open(photo)
         except OSError:
-            await dev.edit("`Unsupported image type`")
+            await dev.edit("`Unsupported image type.`")
             return
         name = "okgoogle.png"
         image.save(name, "PNG")
@@ -242,22 +247,4 @@ async def apk(e):
         )
         app_details += (
             "\n<code>Features :</code> <a href='"
-            + app_link
-            + "'>View in Play Store</a>"
-        )
-        app_details += "\n\n===> Group Controller<==="
-        await e.reply(app_details, link_preview=True, parse_mode="HTML")
-    except IndexError:
-        await e.reply("No result found in search. Please enter **Valid app name**")
-    except Exception as err:
-        await e.reply(f"Exception Occurred: {str(err)}")
-
-
-__mod_name__ = "Gᴏᴏɢʟᴇ"
-
-__help__ = """
- ❍ /google <text>: Perform a Google search
- ❍ /img <text>: Search Google for images and returns them. Specify lim for more results (e.g., `/img hello lim=10`).
- ❍ /app <appname>: Search for an app on the Play Store and returns its details.
- ❍ /reverse |pp |grs: Performs a reverse image search of the media you replied to.
-"""
+           
