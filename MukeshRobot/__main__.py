@@ -1012,7 +1012,7 @@ def donate(update: Update, context: CallbackContext):
 
         if OWNER_ID != 7093899037:
             update.effective_message.reply_text(
-                f"» ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴩᴇʀ ᴏғ {dispatcher.bot.first_name} sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ ɪs [ᴅᴇᴠᴇʟᴏᴘᴇʀ](https://t.me/Demonxcoder)"
+                f"» ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴩᴇʀ ᴏғ {dispatcher.bot.first_name} sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ ɪs [ᴅᴇᴠᴇʟᴏᴘᴇʀ]("https://t.me/Demonxcoder")"
                 f"\n\nʙᴜᴛ ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴅᴏɴᴀᴛᴇ ᴛᴏ ᴛʜᴇ ᴩᴇʀsᴏɴ ᴄᴜʀʀᴇɴᴛʟʏ ʀᴜɴɴɪɴɢ ᴍᴇ : [ʜᴇʀᴇ]("https://t.me/demonxcoder")",
                 parse_mode=ParseMode.MARKDOWN,
                 
