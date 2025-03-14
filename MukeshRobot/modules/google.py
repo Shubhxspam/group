@@ -54,7 +54,7 @@ async def google_search(event):
         await webevent.edit(f"Error: {str(e)}")
 
 
-@register(pattern="^/img (.*)")
+@register(pattern="^/imgbbb (.*)")
 async def img_sampler(event):
     if event.fwd_from:
         return
@@ -85,7 +85,7 @@ async def img_sampler(event):
 
 
 @register(pattern=r"^/reverse|^/pp|^/grs(?: |$)(\d*)")
-async def reverse_image_search(img):
+async def reverse_image_search(imgbbb):
     if os.path.isfile("okgoogle.png"):
         os.remove("okgoogle.png")
 
