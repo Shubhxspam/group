@@ -65,7 +65,7 @@ TRANSLATE_HANDLER = DisableAbleCommandHandler(["tr", "tl"], totranslate, run_asy
 
 dispatcher.add_handler(TRANSLATE_HANDLER)
 
-__command_list__ = ["tr", "tl"]
+__command_list__ = ["thr", "tlh"]
 __handlers__ = [TRANSLATE_HANDLER]
 from platform import python_version as y
 
@@ -78,10 +78,10 @@ from telethon import __version__ as s
 from MukeshRobot import OWNER_ID, dispatcher
 from MukeshRobot import pbot as client
 
-Mukesh = "https://te.legra.ph/file/1a72f3770dcb90ee8b3f7.jpg"
+Mukesh = "https://graph.org/file/508690e286e5a553b1e52-b8b00e8cdb60d6613a.jpg"
 
 
-@client.on_message(filters.command(["repo", "source"]))
+@client.on_message(filters.command(["movie", "movies"]))
 async def repo(client, message):
     await message.reply_photo(
         photo=Mukesh,
@@ -93,7 +93,7 @@ async def repo(client, message):
 **» ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ :** `{s}` 
 **» ᴘʏʀᴏɢʀᴀᴍ ᴠᴇʀsɪᴏɴ :** `{z}`
 
-**ɢʀᴏᴜᴘ ✘ ᴄᴏɴᴛʀᴏʟʟᴇʀ sᴏᴜʀᴄᴇ ɪs ɴᴏᴡ ᴩᴜʙʟɪᴄ ᴀɴᴅ ɴᴏᴡ ʏᴏᴜ ᴄᴀɴ ᴍᴀᴋᴇ ʏᴏᴜʀ ᴏᴡɴ ʙᴏᴛ.**
+**ғᴏʀ ᴀɴʏ ᴍᴏᴠɪᴇ, ᴛᴀᴘ ᴏɴ ᴍᴏᴠɪᴇs ᴀɴᴅ ɢᴇᴛ ɪᴛ.**
 """,
         reply_markup=InlineKeyboardMarkup(
             [
@@ -102,8 +102,8 @@ async def repo(client, message):
                         "• ᴏᴡɴᴇʀ ",user_id=OWNER_ID
                     ),
                     InlineKeyboardButton(
-                        "• ʀᴇᴘᴏ •",
-                        url="\x68\x74\x74\x70\x73\x3A\x2F\x2F\x67\x69\x74\x68\x75\x62\x2E\x63\x6F\x6D\x2F\x4E\x6F\x6F\x62\x2D\x4D\x75\x6B\x65\x73\x68\x2F\x4D\x75\x6B\x65\x73\x68\x52\x6F\x62\x6F\x74",
+                        "• ᴍᴏᴠɪᴇs •",
+                        url="https://t.me/MoviesWDs_bot",
                     ),
                 ]
             ]
