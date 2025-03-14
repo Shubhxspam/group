@@ -4,7 +4,7 @@ import time
 from pyrogram.enums import ChatAction, ParseMode
 from pyrogram import filters
 from MukeshAPI import api
-@Mukesh.on_message(filters.command(["chatgpt","ai","ask"],  prefixes=["+", ".", "/", "-", "?", "$","#","&"]))
+@Mukesh.on_message(filters.command(["chatgptlll","ailll","asklll"],  prefixes=["+", ".", "/", "-", "?", "$","#","&"]))
 async def chat_gpt(bot, message):
     
     try:
@@ -24,5 +24,5 @@ __help__ = """
  Cʜᴀᴛɢᴘᴛ ᴄᴀɴ ᴀɴsᴡᴇʀ ʏᴏᴜʀ ǫᴜᴇsᴛɪᴏɴ  ᴀɴᴅ sʜᴏᴡs ʏᴏᴜ ᴛʜᴇ ʀᴇsᴜʟᴛ
 
  ❍ /chatgpt  *:* ʀᴇᴘʟʏ ᴛo ᴍᴇssᴀɢᴇ ᴏʀ ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ
- 
+ ❍ /ai      *:* sᴇᴀʀᴄʜ ᴀɴᴅ ᴀsᴋ ᴀɴʏᴛʜɪɴɢ. 
  """
