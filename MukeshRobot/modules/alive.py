@@ -44,7 +44,7 @@ PHOTO = [
 
 Mukesh = [
     [
-        InlineKeyboardButton(text="ɴᴏᴏʙ", user_id=OWNER_ID),
+        InlineKeyboardButton(text="𝐌я.𝐏αѕѕєяву", user_id=OWNER_ID),
         InlineKeyboardButton(text="ꜱᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
