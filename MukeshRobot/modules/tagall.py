@@ -9,10 +9,10 @@ from MukeshRobot import telethn as client
 
 spam_chats = []
 
-@client.on(events.NewMessage(pattern="^@tagall ?(.*)"))
-@client.on(events.NewMessage(pattern="^@all ?(.*)"))
-@client.on(events.NewMessage(pattern="^/tagall ?(.*)"))
-@client.on(events.NewMessage(pattern="^@mention ?(.*)"))
+@client.on(events.NewMessage(pattern="^@tagallhh ?(.*)"))
+@client.on(events.NewMessage(pattern="^@allh ?(.*)"))
+@client.on(events.NewMessage(pattern="^/tagallh ?(.*)"))
+@client.on(events.NewMessage(pattern="^@mentionh ?(.*)"))
 async def mentionall(event):
     chat_id = event.chat_id
     if event.is_private:
@@ -73,7 +73,7 @@ async def mentionall(event):
         pass
 
 
-@client.on(events.NewMessage(pattern="^/cancel$"))
+@client.on(events.NewMessage(pattern="^/cancelhh$"))
 async def cancel_spam(event):
     if not event.chat_id in spam_chats:
         return await event.respond("ᴛʜᴇʀᴇ ɪs ɴᴏ ᴘʀᴏᴄᴄᴇss ᴏɴ ɢᴏɪɴɢ..")
