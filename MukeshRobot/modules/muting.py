@@ -287,7 +287,7 @@ __help__ = """
 """
 DMUTE_HANDLER = CommandHandler("dmuteh", dmute, run_async=True)
 MUTE_HANDLER = CommandHandler("muteh", mute, run_async=True)
-UNMUTE_HANDLER = CommandHandler("unmute"h, unmute, run_async=True)
+UNMUTE_HANDLER = CommandHandler("unmuteh", unmute, run_async=True)
 TEMPMUTE_HANDLER = CommandHandler(["tmuteh", "tempmuteh"], temp_mute, run_async=True)
 dispatcher.add_handler(DMUTE_HANDLER)
 dispatcher.add_handler(MUTE_HANDLER)
