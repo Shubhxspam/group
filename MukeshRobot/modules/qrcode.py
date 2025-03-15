@@ -30,7 +30,7 @@ from .. import pbot as  Mukesh,BOT_USERNAME
 import requests
 
 
-@Mukesh.on_message(filters.command("qrcode"))
+@Mukesh.on_message(filters.command("qrcodeh"))
 async def qrcode_(_, message: Message):
     if message.reply_to_message:
         text = message.reply_to_message.text
@@ -51,5 +51,5 @@ sᴜᴄᴇssғᴜʟʟʏ Gᴇɴᴇʀᴀᴛᴇᴅ Qʀᴄᴏᴅᴇ 💘
 # github : noob-mukesh
 __mod_name__ = "Qʀᴄᴏᴅᴇ"
 __help__ = """
- ➻ /qrcode : ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ǫʀᴄᴏᴅᴇ
+ ➻ /qr : ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ǫʀᴄᴏᴅᴇ
  """
