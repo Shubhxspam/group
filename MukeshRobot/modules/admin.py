@@ -914,7 +914,7 @@ RMCHATPIC_HANDLER = CommandHandler("delgpic", rmchatpic, run_async=True)
 SETCHAT_TITLE_HANDLER = CommandHandler("setgtitle", setchat_title, run_async=True)
 
 ADMINLIST_HANDLER = DisableAbleCommandHandler(
-    ["admins", "staff"], adminlist, run_async=True
+    ["madmins", "mstaff"], adminlist, run_async=True
 )
 
 PIN_HANDLER = CommandHandler("pinh", pin, run_async=True)
