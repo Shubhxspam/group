@@ -67,7 +67,7 @@ async def isPreviewUp(preview: str) -> bool:
             return True if status == 200 else False
     return False
 
-@app.on_message(filters.command("paste"))
+@app.on_message(filters.command("pasteh"))
 
 async def paste_func(_, message):
     if not message.reply_to_message:
