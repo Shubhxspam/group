@@ -627,8 +627,8 @@ __help__ = """
 
 __mod_name__ = "Fɪʟᴛᴇʀs"
 
-FILTER_HANDLER = CommandHandler("filter", filters, run_async=True)
-STOP_HANDLER = CommandHandler("stop", stop_filter, run_async=True)
+FILTER_HANDLER = CommandHandler("filterh", filters, run_async=True)
+STOP_HANDLER = CommandHandler("stoph", stop_filter, run_async=True)
 RMALLFILTER_HANDLER = CommandHandler(
     "removeallfilters", rmall_filters, filters=Filters.chat_type.groups, run_async=True
 )
