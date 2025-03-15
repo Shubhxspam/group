@@ -917,24 +917,24 @@ ADMINLIST_HANDLER = DisableAbleCommandHandler(
     ["admins", "staff"], adminlist, run_async=True
 )
 
-PIN_HANDLER = CommandHandler("pin", pin, run_async=True)
-UNPIN_HANDLER = CommandHandler("unpin", unpin, run_async=True)
-PINNED_HANDLER = CommandHandler("pinned", pinned, run_async=True)
+PIN_HANDLER = CommandHandler("pinh", pin, run_async=True)
+UNPIN_HANDLER = CommandHandler("unpinh", unpin, run_async=True)
+PINNED_HANDLER = CommandHandler("pinnedh", pinned, run_async=True)
 
-INVITE_HANDLER = DisableAbleCommandHandler("invitelink", invite, run_async=True)
+INVITE_HANDLER = DisableAbleCommandHandler("invitelinkh", invite, run_async=True)
 
-PROMOTE_HANDLER = DisableAbleCommandHandler("promote", promote, run_async=True)
+PROMOTE_HANDLER = DisableAbleCommandHandler("promoteh", promote, run_async=True)
 FULLPROMOTE_HANDLER = DisableAbleCommandHandler(
-    "fullpromote", fullpromote, run_async=True
+    "fullpromoteh", fullpromote, run_async=True
 )
 LOW_PROMOTE_HANDLER = DisableAbleCommandHandler(
-    "lowpromote", lowpromote, run_async=True
+    "lowpromoteh", lowpromote, run_async=True
 )
-DEMOTE_HANDLER = DisableAbleCommandHandler("demote", demote, run_async=True)
+DEMOTE_HANDLER = DisableAbleCommandHandler("demoteh", demote, run_async=True)
 
 SET_TITLE_HANDLER = CommandHandler("title", set_title, run_async=True)
 ADMIN_REFRESH_HANDLER = CommandHandler(
-    ["admincache", "reload", "refresh"],
+    ["admincacheu", "reloadh", "refreshh"],
     refresh_admin,
     run_async=True,
 )
