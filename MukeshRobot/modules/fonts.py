@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from MukeshRobot.utils.fonts import Fonts
 from MukeshRobot import pbot
 
-@pbot.on_message(filters.command(["font", "fonts"]))
+@pbot.on_message(filters.command(["fonth", "fontsh"]))
 async def style_buttons(c, m, cb=False):
     text = m.text.split(' ',1)[1]
     buttons = [
