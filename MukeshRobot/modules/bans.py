@@ -405,7 +405,7 @@ __help__ = """
  ❍ /kick <ᴜsᴇʀʜᴀɴᴅʟᴇ>*:* ᴋɪᴄᴋs ᴀ ᴜsᴇʀ ᴏᴜᴛ ᴏғ ᴛʜᴇ ɢʀᴏᴜᴘ, (ᴠɪᴀ ʜᴀɴᴅʟᴇ, ᴏʀ ʀᴇᴘʟʏ)
 """
 
-BAN_HANDLER = CommandHandler(["banh", "sban"],ban, run_async=true)
+BAN_HANDLER = CommandHandler(["banh", "sban"], ban, run_async=True)
 TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, run_async=True)
 KICK_HANDLER = CommandHandler("kick", kick, run_async=True)
 UNBAN_HANDLER = CommandHandler("unbanh", unban, run_async=True)
