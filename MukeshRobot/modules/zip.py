@@ -37,7 +37,7 @@ async def is_register_admin(chat, user):
     return None
 
 
-@register(pattern="^/zip")
+@register(pattern="^/ziph")
 async def _(event):
     if event.fwd_from:
         return
@@ -115,7 +115,7 @@ async def is_register_admin(chat, user):
     return None
 
 
-@register(pattern="^/unzip")
+@register(pattern="^/unziph")
 async def _(event):
     if event.fwd_from:
         return
