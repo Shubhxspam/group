@@ -16,7 +16,7 @@ useragent = "Mozilla/5.0 (Linux; Android 11; SM-M017F Build/PPR1.180610.011; wv)
 opener.addheaders = [("User-agent", useragent)]
 
 
-@register(pattern="^/google (.*)")
+@register(pattern="^/googleh (.*)")
 async def google_search(event):
     if event.fwd_from:
         return
