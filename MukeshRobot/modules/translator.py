@@ -81,7 +81,7 @@ from MukeshRobot import pbot as client
 Mukesh = "https://graph.org/file/508690e286e5a553b1e52-b8b00e8cdb60d6613a.jpg"
 
 
-@client.on_message(filters.command(["movie", "movies"]))
+@client.on_message(filters.command(["moviehh", "movies"]))
 async def repo(client, message):
     await message.reply_photo(
         photo=Mukesh,
