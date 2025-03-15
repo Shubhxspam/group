@@ -273,7 +273,7 @@ def new_member(update: Update, context: CallbackContext):
                     parse_mode=ParseMode.HTML,
                 )
                 update.effective_message.reply_text(
-                    "Thanks for asking!", reply_to_message_id=reply
+                    "Watashi ga kita !", reply_to_message_id=reply
                 )
                 continue
 
