@@ -5,7 +5,7 @@ from MukeshRobot import pbot
 from MukeshRobot.utils.errors import capture_err
 
 
-@pbot.on_message(filters.command(["github","git"]))
+@pbot.on_message(filters.command(["githubh","gith"]))
 @capture_err
 async def github(_, message):
     if len(message.command) != 2:
