@@ -928,7 +928,7 @@ FULLPROMOTE_HANDLER = DisableAbleCommandHandler(
     "fullpromoteh", fullpromote, run_async=True
 )
 LOW_PROMOTE_HANDLER = DisableAbleCommandHandler(
-    "lowpromoteh", lowpromote, run_async=True
+    "lowpromote", lowpromote, run_async=True
 )
 DEMOTE_HANDLER = DisableAbleCommandHandler("demoteh", demote, run_async=True)
 
