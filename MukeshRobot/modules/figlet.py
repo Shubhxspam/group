@@ -12,7 +12,7 @@ def figle(text):
     keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="ᴄʜᴀɴɢᴇ", callback_data="figlet"),InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="close_reply")]])
     return figled, keyboard
 
-@Client.on_message(filters.command("figlet"))
+@Client.on_message(filters.command("figleth"))
 async def echo(bot, message):
     global text
     try:
