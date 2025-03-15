@@ -29,7 +29,7 @@ from .. import pbot as  Mukesh,BOT_USERNAME
 from MukeshAPI import api
 from pyrogram.enums import ChatAction,ParseMode
 
-@Mukesh.on_message(filters.command("imagine"))
+@Mukesh.on_message(filters.command("imagineh"))
 async def imagine_(b, message: Message):
     if message.reply_to_message:
         text = message.reply_to_message.text
@@ -57,5 +57,5 @@ async def imagine_(b, message: Message):
 # github : noob-mukesh
 __mod_name__ = "Aɪ ɪᴍᴀɢᴇ"
 __help__ = """
- ➻ /imagine : ɢᴇɴᴇʀᴀᴛᴇ Aɪ ɪᴍᴀɢᴇ ғʀᴏᴍ ᴛᴇxᴛ
+ ➻ /img : ɢᴇɴᴇʀᴀᴛᴇ Aɪ ɪᴍᴀɢᴇ ғʀᴏᴍ ᴛᴇxᴛ
  """
