@@ -5,6 +5,7 @@ class Config(object):
     TOKEN = ""  
     OWNER_ID=None
     
+    
     SUPPORT_CHAT = "" 
     START_IMG = ""
     EVENT_LOGS = ()
@@ -12,9 +13,9 @@ class Config(object):
    
     DATABASE_URL = ""  # A sql database url from elephantsql.com
     CASH_API_KEY = (
-        ""
+        "3BQULWA5D2MRXNVS"
     )
-    TIME_API_KEY = ""
+    TIME_API_KEY = "CNLBLVHGMWPT"
 
     
     BL_CHATS = [] 
